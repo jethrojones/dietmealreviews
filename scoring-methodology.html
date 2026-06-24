@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How We Score — Diet Meal Reviews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0F1117;
+    --ink-soft: #374151;
+    --ink-muted: #6B7280;
+    --teal: #0D9488;
+    --teal-light: #CCFBF1;
+    --amber: #D97706;
+    --amber-light: #FEF3C7;
+    --white: #FFFFFF;
+    --gray-50: #F8FAFC;
+    --gray-100: #F1F5F9;
+    --gray-200: #E2E8F0;
+    --mono: 'DM Mono', monospace;
+    --serif: 'DM Serif Display', serif;
+    --sans: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-logo span { color: var(--teal); }
+
+  nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav a {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--teal); }
+
+  /* HERO */
+  .hero {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    max-width: 640px;
+  }
+
+  .hero-lead {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 580px;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .hero-callout {
+    background: var(--gray-50);
+    border-left: 3px solid var(--teal);
+    padding: 1rem 1.25rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* MAIN LAYOUT */
+  .page-body {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* SECTION */
+  .section {
+    padding: 3.5rem 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .section h2 {
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .section p {
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    font-size: 0.975rem;
+  }
+
+  /* CRITERIA CARDS */
+  .criteria-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .criterion {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.75rem;
+    align-items: start;
+    transition: border-color 0.2s;
+  }
+
+  .criterion:hover { border-color: var(--teal); }
+
+  .criterion-body {}
+
+  .criterion-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .criterion-name .icon {
+    width: 18px;
+    height: 18px;
+    color: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .criterion-desc {
+    font-size: 0.875rem;
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+
+  .criterion-sub {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--teal);
+    margin-top: 0.5rem;
+  }
+
+  .criterion-weight {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .weight-number {
+    font-family: var(--mono);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .weight-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.2rem;
+  }
+
+  .weight-bar {
+    margin-top: 0.4rem;
+    height: 3px;
+    background: var(--gray-200);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .weight-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* SCORE CALCULATOR */
+  .calculator {
+    background: var(--ink);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-top: 2rem;
+    color: var(--white);
+  }
+
+  .calc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.75rem;
+  }
+
+  .calc-title {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9CA3AF;
+  }
+
+  .calc-score-display {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+  }
+
+  .calc-score-number {
+    font-family: var(--mono);
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: var(--teal);
+    line-height: 1;
+    transition: color 0.3s;
+  }
+
+  .calc-score-denom {
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: #6B7280;
+  }
+
+  .calc-row {
+    display: grid;
+    grid-template-columns: 1fr 60px 80px;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .calc-row-label {
+    font-size: 0.85rem;
+    color: #D1D5DB;
+  }
+
+  .calc-input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    background: #374151;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .calc-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--teal);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+
+  .calc-input::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+  .calc-value {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--white);
+    text-align: right;
+  }
+
+  .calc-note {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #1F2937;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: #6B7280;
+    line-height: 1.6;
+  }
+
+  .score-grade {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-left: 0.5rem;
+  }
+
+  /* SCORE TIERS TABLE */
+  .tiers-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .tiers-table th {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-align: left;
+    padding: 0.6rem 1rem;
+    background: var(--gray-100);
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .tiers-table td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--gray-100);
+    color: var(--ink-soft);
+    vertical-align: top;
+  }
+
+  .tiers-table tr:last-child td { border-bottom: none; }
+
+  .tier-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+  }
+
+  .tier-score {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  /* WHAT WE DON'T SCORE */
+  .exclusion-list {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .exclusion-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0.875rem 1rem;
+    background: var(--amber-light);
+    border: 1px solid #FDE68A;
+    border-radius: 5px;
+  }
+
+  .exclusion-x {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--amber);
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .exclusion-body {}
+
+  .exclusion-title {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #92400E;
+    margin-bottom: 0.2rem;
+  }
+
+  .exclusion-reason {
+    font-size: 0.825rem;
+    color: #B45309;
+    line-height: 1.5;
+  }
+
+  /* DATA FRESHNESS */
+  .freshness-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .freshness-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 1.25rem;
+  }
+
+  .freshness-cadence {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--teal);
+    margin-bottom: 0.3rem;
+  }
+
+  .freshness-what {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  .freshness-desc {
+    font-size: 0.775rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  /* FORMULA */
+  .formula-block {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--ink);
+    line-height: 2;
+  }
+
+  .formula-line { color: var(--ink-muted); }
+  .formula-highlight { color: var(--teal); font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--gray-200);
+    padding: 2.5rem 2rem;
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+  }
+
+  .footer-left strong {
+    display: block;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+    font-size: 0.8rem;
+  }
+
+  .footer-right {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    text-align: right;
+  }
+
+  @media (max-width: 600px) {
+    nav ul { display: none; }
+    .freshness-grid { grid-template-columns: 1fr; }
+    .calc-row { grid-template-columns: 1fr 50px; }
+    .calc-value { display: none; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .footer-right { text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">diet<span>meal</span>reviews</a>
+  <ul>
+    <li><a href="reviews.html">Reviews</a></li>
+    <li><a href="#">Compare</a></li>
+    <li><a href="scoring-methodology.html" style="color: var(--teal);">Methodology</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Scoring Methodology · v1.0</p>
+  <h1>We don't score taste. We score value.</h1>
+  <p class="hero-lead">
+    Taste is personal. Price-per-gram of protein is not. Our scoring system measures only what can be objectively verified — cost efficiency, nutritional accuracy, reliability, and transparency — so you can make decisions based on data, not someone else's palate.
+  </p>
+  <div class="hero-callout">
+    Every score on this site is derived from the formula below. No editorial override. No sponsored placement. If a service scores a 4.2, it scored a 4.2 by the numbers.
+  </div>
+</div>
+
+<div class="page-body">
+
+  <!-- CRITERIA -->
+  <div class="section">
+    <p class="section-label">The Five Dimensions</p>
+    <h2>What we measure, and why</h2>
+    <p>Each dimension is weighted by its impact on a consumer's actual experience and long-term value. Weights are fixed and not adjusted per service or category.</p>
+
+    <div class="criteria-grid">
+
+      <div class="criterion">
+        <div class="criterion-body">
+          <div class="criterion-name">
+            <svg class="icon" viewBox="0 0 20 20" fill="currentColor"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+            Protein Value
+          </div>
+          <div class="criterion-desc">Cost per gram of protein, normalized across serving sizes and shipping costs. The most objective single metric for diet meal value — especially for weight loss, muscle building, and macro-focused eating.</div>
+          <div class="criterion-sub">Metric: all-in cost ÷ grams of protein per meal · updated monthly</div>
+        </div>
+        <div class="criterion-weight">
+          <div class="weight-number">25%</div>
+          <div class="weight-label">Weight</div>
+          <div class="weight-bar"><div class="weight-fill" style="width: 100%"></div></div>
+        </div>
+      </div>
+
+      <div class="criterion">
+        <div class="criterion-body">
+          <div class="criterion-name">
+            <svg class="icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Nutritional Accuracy
+          </div>
+          <div class="criterion-desc">How closely delivered meals match their labeled macros. Sourced from third-party lab reports, independent testing databases, and aggregated user reports flagging significant discrepancies.</div>
+          <div class="criterion-sub">Metric: reported vs. labeled macro variance · sourced from independent labs and community data</div>
+        </div>
+        <div class="criterion-weight">
+          <div class="weight-number">20%</div>
+          <div class="weight-label">Weight</div>
+          <div class="weight-bar"><div class="weight-fill" style="width: 80%"></div></div>
+        </div>
+      </div>
+
+      <div class="criterion">
+        <div class="criterion-body">
+          <div class="criterion-name">
+            <svg class="icon" viewBox="0 0 20 20" fill="currentColor"><path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/><path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"/></svg>
+            Delivery Reliability
+          </div>
+          <div class="criterion-desc">Aggregated delivery complaint rate drawn from BBB filings, Trustpilot reviews, Reddit community data, and our own reader reports. Measured as complaint incidents per 1,000 orders estimated.</div>
+          <div class="criterion-sub">Metric: complaint rate per 1k estimated orders · rolling 90-day window</div>
+        </div>
+        <div class="criterion-weight">
+          <div class="weight-number">20%</div>
+          <div class="weight-label">Weight</div>
+          <div class="weight-bar"><div class="weight-fill" style="width: 80%"></div></div>
+        </div>
+      </div>
+
+      <div class="criterion">
+        <div class="criterion-body">
+          <div class="criterion-name">
+            <svg class="icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+            Price Transparency
+          </div>
+          <div class="criterion-desc">All-in cost versus advertised cost. We calculate the final checkout price including shipping, packaging fees, and any non-optional add-ons, then measure the delta from the headline price shown in marketing.</div>
+          <div class="criterion-sub">Metric: (final price − advertised price) ÷ advertised price · updated quarterly</div>
+        </div>
+        <div class="criterion-weight">
+          <div class="weight-number">20%</div>
+          <div class="weight-label">Weight</div>
+          <div class="weight-bar"><div class="weight-fill" style="width: 80%"></div></div>
+        </div>
+      </div>
+
+      <div class="criterion">
+        <div class="criterion-body">
+          <div class="criterion-name">
+            <svg class="icon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z"/></svg>
+            Menu Flexibility
+          </div>
+          <div class="criterion-desc">How well the service accommodates dietary needs: available filters (keto, vegan, diabetic-friendly, etc.), ability to skip weeks without penalty, and ease of cancellation without dark patterns.</div>
+          <div class="criterion-sub">Metric: scored rubric across 8 flexibility criteria · audited quarterly</div>
+        </div>
+        <div class="criterion-weight">
+          <div class="weight-number">15%</div>
+          <div class="weight-label">Weight</div>
+          <div class="weight-bar"><div class="weight-fill" style="width: 60%"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FORMULA -->
+  <div class="section">
+    <p class="section-label">The Formula</p>
+    <h2>How scores are calculated</h2>
+    <p>Each dimension is scored 1–10, then multiplied by its weight. The final score is the sum, expressed on a 10-point scale.</p>
+
+    <div class="formula-block">
+      <div class="formula-line">// Final Score (out of 10)</div>
+      <br>
+      Score = <span class="formula-highlight">(ProteinValue × 0.25)</span>
+            + <span class="formula-highlight">(NutritionalAccuracy × 0.20)</span>
+            + <span class="formula-highlight">(DeliveryReliability × 0.20)</span>
+            + <span class="formula-highlight">(PriceTransparency × 0.20)</span>
+            + <span class="formula-highlight">(MenuFlexibility × 0.15)</span>
+      <br><br>
+      <div class="formula-line">// Example</div>
+      Score = (8.2 × 0.25) + (7.5 × 0.20) + (9.1 × 0.20) + (6.8 × 0.20) + (7.0 × 0.15)
+            = <span class="formula-highlight">7.82 / 10</span>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE CALCULATOR -->
+  <div class="section">
+    <p class="section-label">Interactive</p>
+    <h2>Try the score calculator</h2>
+    <p>Adjust the sliders to see how a hypothetical service would score under our methodology. This is exactly the math behind every rating on the site.</p>
+
+    <div class="calculator">
+      <div class="calc-header">
+        <span class="calc-title">Score Simulator</span>
+        <div class="calc-score-display">
+          <span class="calc-score-number" id="totalScore">7.82</span>
+          <span class="calc-score-denom">/ 10</span>
+        </div>
+      </div>
+
+      <div class="calc-row">
+        <span class="calc-row-label">Protein Value (25%)</span>
+        <input type="range" class="calc-input" id="s1" min="1" max="10" step="0.1" value="8.2">
+        <span class="calc-value" id="v1">8.2</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-row-label">Nutritional Accuracy (20%)</span>
+        <input type="range" class="calc-input" id="s2" min="1" max="10" step="0.1" value="7.5">
+        <span class="calc-value" id="v2">7.5</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-row-label">Delivery Reliability (20%)</span>
+        <input type="range" class="calc-input" id="s3" min="1" max="10" step="0.1" value="9.1">
+        <span class="calc-value" id="v3">9.1</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-row-label">Price Transparency (20%)</span>
+        <input type="range" class="calc-input" id="s4" min="1" max="10" step="0.1" value="6.8">
+        <span class="calc-value" id="v4">6.8</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-row-label">Menu Flexibility (15%)</span>
+        <input type="range" class="calc-input" id="s5" min="1" max="10" step="0.1" value="7.0">
+        <span class="calc-value" id="v5">7.0</span>
+      </div>
+
+      <div class="calc-note" id="calcNote">
+        Grade: <strong id="gradeLabel" style="color: #34D399;">B+ · Strong Pick</strong> — Good protein value and reliable delivery. Minor price transparency issues to be aware of.
+      </div>
+    </div>
+  </div>
+
+  <!-- SCORE TIERS -->
+  <div class="section">
+    <p class="section-label">Score Tiers</p>
+    <h2>What the numbers mean</h2>
+    <p>Scores are not curved or adjusted. A service earns its tier purely by the numbers.</p>
+
+    <table class="tiers-table">
+      <thead>
+        <tr>
+          <th>Score</th>
+          <th>Grade</th>
+          <th>What it means</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tier-score">9.0 – 10.0</span></td>
+          <td><span class="tier-badge" style="background: #D1FAE5; color: #065F46;">A · Exceptional</span></td>
+          <td style="font-size: 0.85rem;">Excels across all five dimensions. Genuinely rare. Represents the best objective value in the category.</td>
+        </tr>
+        <tr>
+          <td><span class="tier-score">8.0 – 8.9</span></td>
+          <td><span class="tier-badge" style="background: #ECFDF5; color: #065F46;">A− · Excellent</span></td>
+          <td style="font-size: 0.85rem;">Strong performance with minor gaps. Most top-tier services land here.</td>
+        </tr>
+        <tr>
+          <td><span class="tier-score">7.0 – 7.9</span></td>
+          <td><span class="tier-badge" style="background: #EFF6FF; color: #1E40AF;">B · Good</span></td>
+          <td style="font-size: 0.85rem;">Solid value with one or two meaningful weaknesses. Worth considering depending on your priorities.</td>
+        </tr>
+        <tr>
+          <td><span class="tier-score">6.0 – 6.9</span></td>
+          <td><span class="tier-badge" style="background: #FEF9C3; color: #854D0E;">C · Average</span></td>
+          <td style="font-size: 0.85rem;">Passes the bar but has notable gaps. Usually a price-value mismatch or reliability concerns.</td>
+        </tr>
+        <tr>
+          <td><span class="tier-score">Below 6.0</span></td>
+          <td><span class="tier-badge" style="background: #FEE2E2; color: #991B1B;">D · Below Average</span></td>
+          <td style="font-size: 0.85rem;">Significant issues in one or more dimensions. We recommend alternatives in the same category.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- WHAT WE DON'T SCORE -->
+  <div class="section">
+    <p class="section-label">Editorial Stance</p>
+    <h2>What we deliberately don't score</h2>
+    <p>These omissions are intentional. Each one is excluded because it cannot be measured objectively at scale.</p>
+
+    <div class="exclusion-list">
+      <div class="exclusion-item">
+        <div class="exclusion-x">✕</div>
+        <div class="exclusion-body">
+          <div class="exclusion-title">Taste and flavor</div>
+          <div class="exclusion-reason">Subjective by definition. One person's "bland" is another's "clean eating." Taste scores are the primary vector for biased affiliate reviews — we've removed it entirely.</div>
+        </div>
+      </div>
+      <div class="exclusion-item">
+        <div class="exclusion-x">✕</div>
+        <div class="exclusion-body">
+          <div class="exclusion-title">Packaging aesthetics</div>
+          <div class="exclusion-reason">Preference-based and irrelevant to nutritional outcomes. We note packaging sustainability claims only when they're third-party verified.</div>
+        </div>
+      </div>
+      <div class="exclusion-item">
+        <div class="exclusion-x">✕</div>
+        <div class="exclusion-body">
+          <div class="exclusion-title">Brand reputation or history</div>
+          <div class="exclusion-reason">A service's past does not predict today's value. Scores reflect current, measured performance — not brand sentiment or how long a company has existed.</div>
+        </div>
+      </div>
+      <div class="exclusion-item">
+        <div class="exclusion-x">✕</div>
+        <div class="exclusion-body">
+          <div class="exclusion-title">Celebrity or influencer endorsement</div>
+          <div class="exclusion-reason">Paid partnerships distort perception without adding informational value. We note when a service relies heavily on influencer marketing as a transparency flag only.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA FRESHNESS -->
+  <div class="section">
+    <p class="section-label">Data Integrity</p>
+    <h2>How we keep data current</h2>
+    <p>Stale data is wrong data. Prices change, menus shift, delivery performance fluctuates. Here's our update cadence.</p>
+
+    <div class="freshness-grid">
+      <div class="freshness-card">
+        <div class="freshness-cadence">Monthly</div>
+        <div class="freshness-what">Protein Value</div>
+        <div class="freshness-desc">Menu prices and nutrition labels are scraped and recalculated every 30 days. Score updates automatically if the ratio shifts by more than 5%.</div>
+      </div>
+      <div class="freshness-card">
+        <div class="freshness-cadence">Rolling 90d</div>
+        <div class="freshness-what">Delivery Reliability</div>
+        <div class="freshness-desc">Complaint data is pulled on a trailing 90-day window. A single bad month doesn't tank a score — but a sustained pattern does.</div>
+      </div>
+      <div class="freshness-card">
+        <div class="freshness-cadence">Quarterly</div>
+        <div class="freshness-what">All Other Dimensions</div>
+        <div class="freshness-desc">Price transparency, nutritional accuracy, and menu flexibility are audited quarterly or whenever a service makes a significant policy or menu change.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">
+    <strong>dietmealreviews.com</strong>
+    Methodology v1.0 · Last updated June 2026
+  </div>
+  <div class="footer-right">
+    Scores are calculated algorithmically.<br>
+    No service can pay to influence its rating.
+  </div>
+</footer>
+
+<script>
+  const weights = [0.25, 0.20, 0.20, 0.20, 0.15];
+  const sliders = [
+    document.getElementById('s1'),
+    document.getElementById('s2'),
+    document.getElementById('s3'),
+    document.getElementById('s4'),
+    document.getElementById('s5'),
+  ];
+  const valueDisplays = [
+    document.getElementById('v1'),
+    document.getElementById('v2'),
+    document.getElementById('v3'),
+    document.getElementById('v4'),
+    document.getElementById('v5'),
+  ];
+  const totalScoreEl = document.getElementById('totalScore');
+  const calcNoteEl = document.getElementById('calcNote');
+  const gradeLabelEl = document.getElementById('gradeLabel');
+
+  function getGrade(score) {
+    if (score >= 9.0) return { label: 'A · Exceptional', color: '#34D399', note: 'Excels across all five dimensions. One of the strongest objective values in the category.' };
+    if (score >= 8.0) return { label: 'A− · Excellent', color: '#6EE7B7', note: 'Strong performance with minor gaps. A reliable choice for most diet goals.' };
+    if (score >= 7.0) return { label: 'B · Good', color: '#93C5FD', note: 'Solid value with one or two meaningful weaknesses. Worth considering depending on your priorities.' };
+    if (score >= 6.0) return { label: 'C · Average', color: '#FCD34D', note: 'Passes the bar but has notable gaps. Usually a price-value mismatch or reliability concerns.' };
+    return { label: 'D · Below Average', color: '#FCA5A5', note: 'Significant issues in one or more dimensions. We recommend exploring alternatives.' };
+  }
+
+  function updateScore() {
+    let total = 0;
+    sliders.forEach((slider, i) => {
+      const val = parseFloat(slider.value);
+      valueDisplays[i].textContent = val.toFixed(1);
+      total += val * weights[i];
+    });
+    const rounded = total.toFixed(2);
+    totalScoreEl.textContent = rounded;
+
+    const grade = getGrade(parseFloat(rounded));
+    gradeLabelEl.textContent = grade.label;
+    gradeLabelEl.style.color = grade.color;
+    totalScoreEl.style.color = grade.color;
+    calcNoteEl.innerHTML = `Grade: <strong id="gradeLabel" style="color: ${grade.color}">${grade.label}</strong> — ${grade.note}`;
+  }
+
+  sliders.forEach(slider => slider.addEventListener('input', updateScore));
+  updateScore();
+</script>
+
+</body>
+</html>

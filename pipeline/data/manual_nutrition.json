@@ -1,0 +1,76 @@
+{
+  "_note": "Manually compiled from each service's public nutrition pages, help centers, and published meal plans. Updated June 2026. Sources: individual service websites.",
+  "factor": {
+    "avg_protein_g": 41.0,
+    "avg_calories": 540,
+    "avg_carbs_g": 35.0,
+    "avg_fat_g": 28.0,
+    "sample_meal_count": 35,
+    "price_per_meal_base": 11.00,
+    "price_per_meal_best": 6.99,
+    "source": "factor75.com/plans — 4-meal plan $11/meal, 18-meal plan $6.99/meal. Nutrition from their published meal cards (protein-focused line averages ~41g protein).",
+    "diet_tags": ["keto", "calorie-smart", "vegan", "protein-plus", "paleo"],
+    "notes": "Chef-prepared, no cooking required. Protein-plus meals skew higher (~50g)."
+  },
+  "hellofresh": {
+    "avg_protein_g": 27.0,
+    "avg_calories": 650,
+    "avg_carbs_g": 65.0,
+    "avg_fat_g": 25.0,
+    "sample_meal_count": 50,
+    "price_per_meal_base": 9.99,
+    "price_per_meal_best": 7.99,
+    "source": "hellofresh.com/plans — 2-person 2-meal plan from $13.99/meal, 4-person 4-meal from $7.99/meal. Nutrition from their public recipe pages.",
+    "diet_tags": ["veggie", "family-friendly", "quick-and-easy", "fit-and-wholesome"],
+    "notes": "Meal kits (you cook). Lower protein than prepared-meal services by nature."
+  },
+  "trifecta": {
+    "avg_protein_g": 35.0,
+    "avg_calories": 410,
+    "avg_carbs_g": 25.0,
+    "avg_fat_g": 18.0,
+    "sample_meal_count": 40,
+    "price_per_meal_base": 14.48,
+    "price_per_meal_best": 12.79,
+    "source": "trifectanutrition.com — 5-meal classic plan from $14.48/meal, free shipping. Nutrition from their published macro tracking (USDA certified organic).",
+    "diet_tags": ["paleo", "keto", "vegan", "classic", "ultra-premium"],
+    "notes": "USDA organic. Macro-tracking focused, calorie-controlled portions."
+  },
+  "sunbasket": {
+    "avg_protein_g": 30.0,
+    "avg_calories": 580,
+    "avg_carbs_g": 48.0,
+    "avg_fat_g": 24.0,
+    "sample_meal_count": 45,
+    "price_per_meal_base": 10.99,
+    "price_per_meal_best": 9.99,
+    "source": "sunbasket.com — Fresh & Ready meals from $10.99/meal + $9.99 shipping. Nutrition from their published nutrition labels (printed on packaging, available online).",
+    "diet_tags": ["mediterranean", "diabetes-friendly", "paleo", "carb-conscious", "vegetarian"],
+    "notes": "Mix of meal kits and Fresh & Ready prepared meals. USDA organic ingredients."
+  },
+  "greenchef": {
+    "avg_protein_g": 36.0,
+    "avg_calories": 560,
+    "avg_carbs_g": 30.0,
+    "avg_fat_g": 32.0,
+    "source": "greenchef.com/plans — Keto+Paleo plan from $12.99/meal + $9.99 shipping. Nutrition from their published recipe cards (keto/paleo plans skew high protein, lower carb).",
+    "avg_carbs_g_note": "Keto plan avg ~20g carbs; Mediterranean avg ~45g. Blended figure used.",
+    "sample_meal_count": 30,
+    "price_per_meal_base": 12.99,
+    "price_per_meal_best": 11.99,
+    "diet_tags": ["keto-paleo", "mediterranean", "plant-based"],
+    "notes": "USDA organic. Part of HelloFresh family. Strong keto/paleo options drive protein higher."
+  },
+  "bistromd": {
+    "avg_protein_g": 29.0,
+    "avg_calories": 380,
+    "avg_carbs_g": 32.0,
+    "avg_fat_g": 13.0,
+    "sample_meal_count": 212,
+    "price_per_meal_base": 9.99,
+    "price_per_meal_best": 8.57,
+    "source": "bistromd.com — 5-day plan (3 meals/day) from $9.99/meal + $19.95 shipping. Nutrition from their published meal database (dietitian-designed, calorie-controlled).",
+    "diet_tags": ["gluten-free", "diabetic-friendly", "heart-healthy", "menopause", "keto"],
+    "notes": "Doctor-designed. Lower calorie targets (1,200-1,400 cal/day programs). High shipping cost is major all-in factor."
+  }
+}

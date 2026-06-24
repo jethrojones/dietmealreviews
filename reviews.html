@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Diet Meal Delivery Services 2026 — Ranked by Data | Diet Meal Reviews</title>
+<meta name="description" content="7 diet meal delivery services ranked across 5 objective dimensions: protein value, nutritional accuracy, delivery reliability, price transparency, and menu flexibility.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0F1117; --ink-soft: #374151; --ink-muted: #6B7280;
+    --teal: #0D9488; --teal-light: #CCFBF1;
+    --amber: #D97706; --amber-light: #FEF3C7;
+    --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0;
+    --mono: 'DM Mono', monospace; --serif: 'DM Serif Display', serif; --sans: 'Inter', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--white); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 2rem; border-bottom: 1px solid var(--gray-200); position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); z-index: 100; }
+  .nav-logo { font-family: var(--mono); font-size: 0.85rem; font-weight: 500; color: var(--ink); text-decoration: none; letter-spacing: 0.05em; }
+  .nav-logo span { color: var(--teal); }
+  nav ul { display: flex; gap: 2rem; list-style: none; }
+  nav a { font-size: 0.85rem; color: var(--ink-muted); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  nav a:hover, nav a.active { color: var(--teal); }
+
+  /* HERO */
+  .hero { max-width: 760px; margin: 0 auto; padding: 5rem 2rem 3rem; border-bottom: 1px solid var(--gray-200); }
+  .hero-eyebrow { font-family: var(--mono); font-size: 0.75rem; font-weight: 500; color: var(--teal); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; color: var(--ink); margin-bottom: 1.25rem; }
+  .hero-lead { font-size: 1.05rem; color: var(--ink-soft); max-width: 580px; line-height: 1.7; margin-bottom: 2rem; }
+  .hero-stats { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .hero-stat { display: flex; flex-direction: column; gap: 0.2rem; }
+  .hero-stat-num { font-family: var(--mono); font-size: 1.5rem; font-weight: 500; color: var(--ink); }
+  .hero-stat-label { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* CONTROLS */
+  .controls { max-width: 760px; margin: 0 auto; padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--gray-200); gap: 1rem; flex-wrap: wrap; }
+  .controls-label { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .dim-pill { font-family: var(--mono); font-size: 0.68rem; color: var(--teal); background: var(--teal-light); border: 1px solid #99F6E4; padding: 0.25rem 0.6rem; border-radius: 3px; }
+
+  /* RANKED LIST */
+  .ranked-list { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+
+  /* SERVICE CARD */
+  .service-card { padding: 2.5rem 0; border-bottom: 1px solid var(--gray-200); }
+  .service-card:last-child { border-bottom: none; }
+  .card-header { display: grid; grid-template-columns: 48px 1fr auto; gap: 1rem; align-items: start; margin-bottom: 1.25rem; }
+  .rank-num { font-family: var(--mono); font-size: 2rem; font-weight: 500; color: var(--gray-200); line-height: 1; padding-top: 0.1rem; }
+  .rank-num.top { color: var(--teal); }
+  .service-name { font-family: var(--serif); font-size: 1.5rem; color: var(--ink); line-height: 1.2; margin-bottom: 0.35rem; }
+  .service-tagline { font-size: 0.875rem; color: var(--ink-muted); line-height: 1.5; max-width: 500px; }
+  .grade-block { text-align: right; flex-shrink: 0; }
+  .grade-badge { display: inline-flex; align-items: center; padding: 0.35rem 0.8rem; border-radius: 4px; font-family: var(--mono); font-size: 0.85rem; font-weight: 500; margin-bottom: 0.4rem; }
+  .score-display { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-muted); text-align: right; }
+  .score-num { font-size: 1.1rem; color: var(--ink); }
+
+  /* Score bar */
+  .score-bar-wrap { margin-bottom: 1.5rem; }
+  .score-bar-track { height: 4px; background: var(--gray-100); border-radius: 2px; overflow: hidden; margin-bottom: 0.3rem; }
+  .score-bar-fill { height: 100%; border-radius: 2px; }
+  .score-bar-labels { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.65rem; color: var(--ink-muted); }
+
+  /* Metrics row */
+  .metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1.25rem; }
+  .metric { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 5px; padding: 0.875rem; }
+  .metric-value { font-family: var(--mono); font-size: 1.05rem; font-weight: 500; color: var(--ink); line-height: 1; margin-bottom: 0.25rem; }
+  .metric-label { font-family: var(--mono); font-size: 0.62rem; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .metric.hl { border-color: var(--teal); }
+  .metric.hl .metric-value { color: var(--teal); }
+  .metric.warn { border-color: #FCA5A5; }
+  .metric.warn .metric-value { color: #DC2626; }
+
+  /* Dimension bars */
+  .dim-section-label { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .dimension-bars { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+  .dim-row { display: grid; grid-template-columns: 148px 1fr 36px; gap: 0.75rem; align-items: center; }
+  .dim-label { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-muted); white-space: nowrap; }
+  .dim-track { height: 3px; background: var(--gray-200); border-radius: 2px; overflow: hidden; }
+  .dim-fill { height: 100%; background: var(--teal); border-radius: 2px; }
+  .dim-fill.amber { background: var(--amber); }
+  .dim-fill.red { background: #EF4444; }
+  .dim-score { font-family: var(--mono); font-size: 0.72rem; color: var(--ink); text-align: right; }
+
+  /* Data flag */
+  .data-flag { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--mono); font-size: 0.68rem; padding: 0.2rem 0.55rem; border-radius: 3px; margin-top: 0.5rem; }
+  .data-flag.live { color: #065F46; background: #D1FAE5; border: 1px solid #A7F3D0; }
+  .data-flag.manual { color: var(--ink-muted); background: var(--gray-100); border: 1px solid var(--gray-200); }
+
+  /* Insight */
+  .insight { background: var(--gray-50); border-left: 3px solid var(--teal); padding: 0.875rem 1rem; font-family: var(--mono); font-size: 0.8rem; color: var(--ink-soft); line-height: 1.6; margin-top: 1rem; }
+  .insight.warn-insight { border-left-color: #DC2626; }
+  .insight strong { color: var(--ink); }
+
+  /* Methodology callout */
+  .method-section { max-width: 760px; margin: 0 auto; padding: 3.5rem 2rem; border-top: 1px solid var(--gray-200); }
+  .section-label { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .method-section h2 { font-family: var(--serif); font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .method-section p { color: var(--ink-soft); font-size: 0.925rem; line-height: 1.75; margin-bottom: 1rem; }
+  .method-link { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.8rem; color: var(--teal); text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--teal-light); padding-bottom: 0.1rem; transition: border-color 0.2s; }
+  .method-link:hover { border-color: var(--teal); }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--gray-200); padding: 2.5rem 2rem; max-width: 760px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  .footer-left { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-muted); }
+  .footer-left strong { display: block; color: var(--ink); margin-bottom: 0.2rem; font-size: 0.8rem; }
+  .footer-right { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-muted); text-align: right; }
+
+  @media (max-width: 640px) {
+    nav ul { display: none; }
+    .card-header { grid-template-columns: 36px 1fr auto; }
+    .metrics-row { grid-template-columns: repeat(2, 1fr); }
+    .dim-row { grid-template-columns: 120px 1fr 32px; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .footer-right { text-align: center; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">diet<span>meal</span>reviews</a>
+  <ul>
+    <li><a href="reviews.html" class="active">Reviews</a></li>
+    <li><a href="#">Compare</a></li>
+    <li><a href="scoring-methodology.html">Methodology</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Rankings · Updated June 2026</p>
+  <h1>7 diet meal delivery services.<br>One objective score.</h1>
+  <p class="hero-lead">
+    Ranked across 5 dimensions: protein value, nutritional accuracy, delivery reliability,
+    price transparency, and menu flexibility. No taste scores. No sponsored placements.
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="hero-stat-num">7</span><span class="hero-stat-label">Services ranked</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">357</span><span class="hero-stat-label">Meals analyzed</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">5 / 5</span><span class="hero-stat-label">Dimensions scored</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">Jun 2026</span><span class="hero-stat-label">Data as of</span></div>
+  </div>
+</div>
+
+<div class="controls">
+  <span class="controls-label">Ranked by composite score ↓</span>
+  <span class="dim-pill">● All 5 dimensions active</span>
+</div>
+
+<div class="ranked-list">
+
+  <!-- ── 1. TRIFECTA — B 7.68 ── -->
+  <div class="service-card">
+    <div class="card-header">
+      <div class="rank-num top">01</div>
+      <div>
+        <div class="service-name">Trifecta</div>
+        <div class="service-tagline">USDA organic, macro-tracked prepared meals. Free shipping, no pricing surprises.</div>
+      </div>
+      <div class="grade-block">
+        <div class="grade-badge" style="background:#DBEAFE;color:#1E40AF;">B · Good</div>
+        <div class="score-display"><span class="score-num">7.68</span> / 10</div>
+      </div>
+    </div>
+
+    <div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:76.8%;background:#3B82F6;"></div></div>
+      <div class="score-bar-labels"><span>0</span><span>10</span></div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric"><div class="metric-value">$0.41</div><div class="metric-label">/ gram protein</div></div>
+      <div class="metric"><div class="metric-value">$14.48</div><div class="metric-label">All-in / meal</div></div>
+      <div class="metric"><div class="metric-value">35g</div><div class="metric-label">Avg protein</div></div>
+      <div class="metric hl"><div class="metric-value">3.6 / 5</div><div class="metric-label">Trustpilot</div></div>
+    </div>
+
+    <p class="dim-section-label">Dimension scores</p>
+    <div class="dimension-bars">
+      <div class="dim-row"><span class="dim-label">Protein Value</span><div class="dim-track"><div class="dim-fill" style="width:48.2%"></div></div><span class="dim-score">4.8</span></div>
+      <div class="dim-row"><span class="dim-label">Nutritional Accuracy</span><div class="dim-track"><div class="dim-fill" style="width:85%"></div></div><span class="dim-score">8.5</span></div>
+      <div class="dim-row"><span class="dim-label">Delivery Reliability</span><div class="dim-track"><div class="dim-fill" style="width:72%"></div></div><span class="dim-score">7.2</span></div>
+      <div class="dim-row"><span class="dim-label">Price Transparency</span><div class="dim-track"><div class="dim-fill" style="width:100%"></div></div><span class="dim-score">10.0</span></div>
+      <div class="dim-row"><span class="dim-label">Menu Flexibility</span><div class="dim-track"><div class="dim-fill" style="width:88.9%"></div></div><span class="dim-score">8.9</span></div>
+    </div>
+
+    <span class="data-flag manual">⊙ Nutrition from published plan data · accuracy from 40 Trustpilot reviews · 0% accuracy complaints · USDA Organic</span>
+    <div class="insight">
+      <strong>Why it ranks first:</strong> Free shipping means zero price gap between advertised and all-in cost —
+      a perfect 10/10 on price transparency. USDA Organic certification adds a +0.5 bonus to nutritional accuracy
+      (third-party ingredient oversight). Solid on every dimension with no serious weakness.
+    </div>
+  </div>
+
+  <!-- ── 2. SNAP KITCHEN — B 7.11 ── -->
+  <div class="service-card">
+    <div class="card-header">
+      <div class="rank-num top">02</div>
+      <div>
+        <div class="service-name">Snap Kitchen</div>
+        <div class="service-tagline">Prepared meals with full à la carte ordering. No subscription required — pick up in store or deliver.</div>
+      </div>
+      <div class="grade-block">
+        <div class="grade-badge" style="background:#DBEAFE;color:#1E40AF;">B · Good</div>
+        <div class="score-display"><span class="score-num">7.11</span> / 10</div>
+      </div>
+    </div>
+
+    <div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:71.1%;background:#3B82F6;"></div></div>
+      <div class="score-bar-labels"><span>0</span><span>10</span></div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric"><div class="metric-value">$0.52</div><div class="metric-label">/ gram protein</div></div>
+      <div class="metric"><div class="metric-value">$10.83</div><div class="metric-label">All-in / meal</div></div>
+      <div class="metric"><div class="metric-value">20.8g</div><div class="metric-label">Avg protein (all)</div></div>
+      <div class="metric"><div class="metric-value">2.9 / 5</div><div class="metric-label">Trustpilot</div></div>
+    </div>
+
+    <p class="dim-section-label">Dimension scores</p>
+    <div class="dimension-bars">
+      <div class="dim-row"><span class="dim-label">Protein Value</span><div class="dim-track"><div class="dim-fill amber" style="width:33.9%"></div></div><span class="dim-score">3.4</span></div>
+      <div class="dim-row"><span class="dim-label">Nutritional Accuracy</span><div class="dim-track"><div class="dim-fill" style="width:80%"></div></div><span class="dim-score">8.0</span></div>
+      <div class="dim-row"><span class="dim-label">Delivery Reliability</span><div class="dim-track"><div class="dim-fill amber" style="width:58%"></div></div><span class="dim-score">5.8</span></div>
+      <div class="dim-row"><span class="dim-label">Price Transparency</span><div class="dim-track"><div class="dim-fill" style="width:100%"></div></div><span class="dim-score">10.0</span></div>
+      <div class="dim-row"><span class="dim-label">Menu Flexibility</span><div class="dim-track"><div class="dim-fill" style="width:100%"></div></div><span class="dim-score">10.0</span></div>
+    </div>
+
+    <span class="data-flag live">● 145 meals analyzed directly from live menu API · 13 Trustpilot reviews · 0% accuracy complaints</span>
+    <div class="insight">
+      <strong>The flexibility winner:</strong> 10/10 on both price transparency and menu flexibility — the only service
+      with à la carte ordering (no subscription required), full online cancellation, and zero shipping markup.
+      The 20.8g protein average spans their full 145-meal catalog including sides and breakfast.
+      Main entrées average <strong>38.1g protein</strong>. Order strategically and the protein efficiency improves significantly.
+    </div>
+  </div>
+
+  <!-- ── 3. FACTOR — C 6.91 ── -->
+  <div class="service-card">
+    <div class="card-header">
+      <div class="rank-num top">03</div>
+      <div>
+        <div class="service-name">Factor</div>
+        <div class="service-tagline">Chef-prepared, dietitian-approved meals. No cooking. Highest protein-per-dollar in the comparison.</div>
+      </div>
+      <div class="grade-block">
+        <div class="grade-badge" style="background:#FEF9C3;color:#854D0E;">C · Average</div>
+        <div class="score-display"><span class="score-num">6.91</span> / 10</div>
+      </div>
+    </div>
+
+    <div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:69.1%;background:#D97706;"></div></div>
+      <div class="score-bar-labels"><span>0</span><span>10</span></div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric hl"><div class="metric-value">$0.34</div><div class="metric-label">/ gram protein</div></div>
+      <div class="metric"><div class="metric-value">$13.75</div><div class="metric-label">All-in / meal</div></div>
+      <div class="metric"><div class="metric-value">41g</div><div class="metric-label">Avg protein</div></div>
+      <div class="metric"><div class="metric-value">3.5 / 5</div><div class="metric-label">Trustpilot</div></div>
+    </div>
+
+    <p class="dim-section-label">Dimension scores</p>
+    <div class="dimension-bars">
+      <div class="dim-row"><span class="dim-label">Protein Value</span><div class="dim-track"><div class="dim-fill" style="width:62.9%"></div></div><span class="dim-score">6.3</span></div>
+      <div class="dim-row"><span class="dim-label">Nutritional Accuracy</span><div class="dim-track"><div class="dim-fill" style="width:80%"></div></div><span class="dim-score">8.0</span></div>
+      <div class="dim-row"><span class="dim-label">Delivery Reliability</span><div class="dim-track"><div class="dim-fill" style="width:70%"></div></div><span class="dim-score">7.0</span></div>
+      <div class="dim-row"><span class="dim-label">Price Transparency</span><div class="dim-track"><div class="dim-fill amber" style="width:50%"></div></div><span class="dim-score">5.0</span></div>
+      <div class="dim-row"><span class="dim-label">Menu Flexibility</span><div class="dim-track"><div class="dim-fill" style="width:88.9%"></div></div><span class="dim-score">8.9</span></div>
+    </div>
+
+    <span class="data-flag manual">⊙ Nutrition from published plan data · 34 Trustpilot reviews · 0% accuracy complaints</span>
+    <div class="insight">
+      <strong>Best protein-per-dollar at $0.34/g</strong> — lowest in the comparison by a meaningful margin.
+      Factor's 41g average protein across their menu is legitimately high for prepared delivery.
+      The single drag is price transparency: shipping adds 25% to the advertised $11/meal base on the 4-meal plan.
+      Ordering 6+ meals per week narrows that gap significantly.
+    </div>
+  </div>
+
+  <!-- ── 4. SUNBASKET — C 6.15 ── -->
+  <div class="service-card">
+    <div class="card-header">
+      <div class="rank-num">04</div>
+      <div>
+        <div class="service-name">Sunbasket</div>
+        <div class="service-tagline">USDA organic meal kits and Fresh &amp; Ready prepared meals. Highest delivery reliability in the comparison.</div>
+      </div>
+      <div class="grade-block">
+        <div class="grade-badge" style="background:#FEF9C3;color:#854D0E;">C · Average</div>
+        <div class="score-display"><span class="score-num">6.15</span> / 10</div>
+      </div>
+    </div>
+
+    <div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:61.5%;background:#D97706;"></div></div>
+      <div class="score-bar-labels"><span>0</span><span>10</span></div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric"><div class="metric-value">$0.53</div><div class="metric-label">/ gram protein</div></div>
+      <div class="metric"><div class="metric-value">$15.98</div><div class="metric-label">All-in / meal</div></div>
+      <div class="metric"><div class="metric-value">30g</div><div class="metric-label">Avg protein</div></div>
+      <div class="metric hl"><div class="metric-value">4.3 / 5</div><div class="metric-label">Trustpilot</div></div>
+    </div>
+
+    <p class="dim-section-label">Dimension scores</p>
+    <div class="dimension-bars">
+      <div class="dim-row"><span class="dim-label">Protein Value</span><div class="dim-track"><div class="dim-fill amber" style="width:32.3%"></div></div><span class="dim-score">3.2</span></div>
+      <div class="dim-row"><span class="dim-label">Nutritional Accuracy</span><div class="dim-track"><div class="dim-fill" style="width:85%"></div></div><span class="dim-score">8.5</span></div>
+      <div class="dim-row"><span class="dim-label">Delivery Reliability</span><div class="dim-track"><div class="dim-fill" style="width:86%"></div></div><span class="dim-score">8.6</span></div>
+      <div class="dim-row"><span class="dim-label">Price Transparency</span><div class="dim-track"><div class="dim-fill red" style="width:25.5%"></div></div><span class="dim-score">2.6</span></div>
+      <div class="dim-row"><span class="dim-label">Menu Flexibility</span><div class="dim-track"><div class="dim-fill" style="width:94.4%"></div></div><span class="dim-score">9.4</span></div>
+    </div>
+
+    <span class="data-flag manual">⊙ Nutrition from published plan data · 40 Trustpilot reviews · 0% accuracy complaints · USDA Organic</span>
+    <div class="insight">
+      <strong>Best delivery reliability (4.3/5 Trustpilot)</strong> and near-perfect menu flexibility (9.4/10) —
+      Sunbasket offers Fresh &amp; Ready single orders without a subscription, full online cancellation, and a wide
+      range of diet options. The ranking penalty comes from protein efficiency ($0.53/g) and a 45% price markup
+      on the base plan. Choose a larger plan to bring the all-in cost closer to the advertised rate.
+    </div>
+  </div>
+
+  <!-- ── 5. GREEN CHEF — D 5.90 ── -->
+  <div class="service-card">
+    <div class="card-header">
+      <div class="rank-num">05</div>
+      <div>
+        <div class="service-name">Green Chef</div>
+        <div class="service-tagline">USDA certified organic meal kits. Keto and paleo focus. Part of the HelloFresh family.</div>
+      </div>
+      <div class="grade-block">
+        <div class="grade-badge" style="background:#FEE2E2;color:#991B1B;">D · Below Average</div>
+        <div class="score-display"><span class="score-num">5.90</span> / 10</div>
+      </div>
+    </div>
+
+    <div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:59%;background:#EF4444;"></div></div>
+      <div class="score-bar-labels"><span>0</span><span>10</span></div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric"><div class="metric-value">$0.50</div><div class="metric-label">/ gram protein</div></div>
+      <div class="metric"><div class="metric-value">$17.98</div><div class="metric-label">All-in / meal</div></div>
+      <div class="metric"><div class="metric-value">36g</div><div class="metric-label">Avg protein</div></div>
+      <div class="metric hl"><div class="metric-value">4.0 / 5</div><div class="metric-label">Trustpilot</div></div>
+    </div>
+
+    <p class="dim-section-label">Dimension scores</p>
+    <div class="dimension-bars">
+      <div class="dim-row"><span class="dim-label">Protein Value</span><div class="dim-track"><div class="dim-fill amber" style="width:36.7%"></div></div><span class="dim-score">3.7</span></div>
+      <div class="dim-row"><span class="dim-label">Nutritional Accuracy</span><div class="dim-track"><div class="dim-fill" style="width:85%"></div></div><span class="dim-score">8.5</span></div>
+      <div class="dim-row"><span class="dim-label">Delivery Reliability</span><div class="dim-track"><div class="dim-fill" style="width:80%"></div></div><span class="dim-score">8.0</span></div>
+      <div class="dim-row"><span class="dim-label">Price Transparency</span><div class="dim-track"><div class="dim-fill red" style="width:33.9%"></div></div><span class="dim-score">3.4</span></div>
+      <div class="dim-row"><span class="dim-label">Menu Flexibility</span><div class="dim-track"><div class="dim-fill amber" style="width:66.7%"></div></div><span class="dim-score">6.7</span></div>
+    </div>
+
+    <span class="data-flag manual">⊙ Nutrition from published plan data · 35 Trustpilot reviews · 0% accuracy complaints · USDA Organic</span>
+    <div class="insight">
+      <strong>Where it loses to Sunbasket:</strong> Green Chef uses the HelloFresh cancellation flow, which requires
+      navigating deep account settings — a known friction point that drops it to 6.7/10 on menu flexibility.
+      No à la carte ordering and limited meal-selection flexibility. Strong delivery reliability (8.0/10) and good
+      protein content, but the 38% price markup from advertised to all-in on the base plan is a headwind.
+    </div>
+  </div>
+
+  <!-- ── 6. HELLOFRESH — D 5.27 ── -->
+  <div class="service-card">
+    <div class="card-header">
+      <div class="rank-num">06</div>
+      <div>
+        <div class="service-name">HelloFresh</div>
+        <div class="service-tagline">The world's largest meal kit service. You cook — which structurally limits protein versus prepared services.</div>
+      </div>
+      <div class="grade-block">
+        <div class="grade-badge" style="background:#FEE2E2;color:#991B1B;">D · Below Average</div>
+        <div class="score-display"><span class="score-num">5.27</span> / 10</div>
+      </div>
+    </div>
+
+    <div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:52.7%;background:#EF4444;"></div></div>
+      <div class="score-bar-labels"><span>0</span><span>10</span></div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric"><div class="metric-value">$0.56</div><div class="metric-label">/ gram protein</div></div>
+      <div class="metric"><div class="metric-value">$14.98</div><div class="metric-label">All-in / meal</div></div>
+      <div class="metric"><div class="metric-value">27g</div><div class="metric-label">Avg protein</div></div>
+      <div class="metric"><div class="metric-value">3.4 / 5</div><div class="metric-label">Trustpilot</div></div>
+    </div>
+
+    <p class="dim-section-label">Dimension scores</p>
+    <div class="dimension-bars">
+      <div class="dim-row"><span class="dim-label">Protein Value</span><div class="dim-track"><div class="dim-fill red" style="width:29.7%"></div></div><span class="dim-score">3.0</span></div>
+      <div class="dim-row"><span class="dim-label">Nutritional Accuracy</span><div class="dim-track"><div class="dim-fill" style="width:80%"></div></div><span class="dim-score">8.0</span></div>
+      <div class="dim-row"><span class="dim-label">Delivery Reliability</span><div class="dim-track"><div class="dim-fill" style="width:68%"></div></div><span class="dim-score">6.8</span></div>
+      <div class="dim-row"><span class="dim-label">Price Transparency</span><div class="dim-track"><div class="dim-fill red" style="width:20.1%"></div></div><span class="dim-score">2.0</span></div>
+      <div class="dim-row"><span class="dim-label">Menu Flexibility</span><div class="dim-track"><div class="dim-fill amber" style="width:77.8%"></div></div><span class="dim-score">7.8</span></div>
+    </div>
+
+    <span class="data-flag manual">⊙ Nutrition from published recipe data · 40 Trustpilot reviews · 0% accuracy complaints</span>
+    <div class="insight">
+      <strong>A category note, not just a score:</strong> HelloFresh is a meal <em>kit</em> service — you cook,
+      which means more balanced, carb-forward recipes and lower protein averages (27g) by design.
+      If cooking is what you want, this comparison doesn't fairly apply; look at our meal kit category rankings.
+      The 50% price markup on the base plan (advertised $9.99, all-in $14.98) is the lowest price transparency
+      score in the group and worth factoring into your decision.
+    </div>
+  </div>
+
+  <!-- ── 7. BISTROMD — D 4.77 ── -->
+  <div class="service-card">
+    <div class="card-header">
+      <div class="rank-num">07</div>
+      <div>
+        <div class="service-name">BistroMD</div>
+        <div class="service-tagline">Doctor-designed diet programs. Calorie-controlled and dietitian-approved. Significant delivery reliability concerns.</div>
+      </div>
+      <div class="grade-block">
+        <div class="grade-badge" style="background:#FEE2E2;color:#991B1B;">D · Below Average</div>
+        <div class="score-display"><span class="score-num">4.77</span> / 10</div>
+      </div>
+    </div>
+
+    <div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:47.7%;background:#EF4444;"></div></div>
+      <div class="score-bar-labels"><span>0</span><span>10</span></div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric"><div class="metric-value">$0.48</div><div class="metric-label">/ gram protein</div></div>
+      <div class="metric"><div class="metric-value">$13.98</div><div class="metric-label">All-in / meal</div></div>
+      <div class="metric"><div class="metric-value">29g</div><div class="metric-label">Avg protein</div></div>
+      <div class="metric warn"><div class="metric-value">1.8 / 5</div><div class="metric-label">Trustpilot</div></div>
+    </div>
+
+    <p class="dim-section-label">Dimension scores</p>
+    <div class="dimension-bars">
+      <div class="dim-row"><span class="dim-label">Protein Value</span><div class="dim-track"><div class="dim-fill amber" style="width:39.1%"></div></div><span class="dim-score">3.9</span></div>
+      <div class="dim-row"><span class="dim-label">Nutritional Accuracy</span><div class="dim-track"><div class="dim-fill" style="width:80%"></div></div><span class="dim-score">8.0</span></div>
+      <div class="dim-row"><span class="dim-label">Delivery Reliability</span><div class="dim-track"><div class="dim-fill red" style="width:36%"></div></div><span class="dim-score">3.6</span></div>
+      <div class="dim-row"><span class="dim-label">Price Transparency</span><div class="dim-track"><div class="dim-fill red" style="width:32.1%"></div></div><span class="dim-score">3.2</span></div>
+      <div class="dim-row"><span class="dim-label">Menu Flexibility</span><div class="dim-track"><div class="dim-fill red" style="width:55.6%"></div></div><span class="dim-score">5.6</span></div>
+    </div>
+
+    <span class="data-flag manual">⊙ 212 products via Shopify catalog · 40 Trustpilot reviews · 0% accuracy complaints · nutrition from published program data</span>
+    <div class="insight warn-insight">
+      <strong>1.8/5 Trustpilot is the defining data point.</strong> This isn't a sampling blip — it reflects a sustained
+      pattern across reviews citing missed deliveries, billing disputes, and difficulty cancelling (must call or email;
+      online cancellation not available). A doctor-designed program with legitimate clinical positioning is
+      undercut by execution problems visible at scale in review data.
+      The 5.6/10 on menu flexibility reflects limited meal swapping and the call-to-cancel requirement.
+      We recommend reviewing current Trustpilot and BBB complaints before subscribing.
+    </div>
+  </div>
+
+</div><!-- /ranked-list -->
+
+<!-- METHODOLOGY CALLOUT -->
+<div class="method-section">
+  <p class="section-label">How scores are calculated</p>
+  <h2>The methodology behind these rankings</h2>
+  <p>
+    Every score on this page is derived from a fixed formula applied equally to all services.
+    No service can pay to improve its ranking. The composite uses all five dimensions:
+    protein value (25%), nutritional accuracy (20%), delivery reliability (20%),
+    price transparency (20%), and menu flexibility (15%).
+  </p>
+  <p>
+    Nutritional accuracy is a proxy metric derived from Trustpilot review text analysis (40 reviews per service),
+    not lab-tested macro verification. Zero accuracy-specific complaints were found across all seven services
+    in our June 2026 sample. Services with USDA Organic certification receive a +0.5 bonus reflecting
+    third-party ingredient oversight.
+  </p>
+  <p>
+    Services marked <strong>⊙ manual seed</strong> use nutrition data sourced from each service's published
+    plan pages and help documentation — not individual meal-level scrapes. Their menus require authentication
+    to access programmatically.
+  </p>
+  <a href="scoring-methodology.html" class="method-link">Read the full scoring methodology →</a>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <strong>dietmealreviews.com</strong>
+    Rankings v1.1 · All 5 dimensions · Data collected June 2026
+  </div>
+  <div class="footer-right">
+    Scores are calculated algorithmically.<br>
+    No service can pay to influence its rating.
+  </div>
+</footer>
+
+</body>
+</html>
