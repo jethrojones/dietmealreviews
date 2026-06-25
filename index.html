@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diet Meal Reviews — Objective Rankings for Meal Prep Delivery</title>
+<meta name="description" content="Objective, data-driven rankings for diet meal delivery services. Scored across 5 dimensions: protein value, nutritional accuracy, delivery reliability, price transparency, and menu flexibility.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0F1117; --ink-soft: #374151; --ink-muted: #6B7280;
+    --teal: #0D9488; --teal-light: #CCFBF1;
+    --white: #FFFFFF; --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0;
+    --mono: 'DM Mono', monospace; --serif: 'DM Serif Display', serif; --sans: 'Inter', sans-serif;
+  }
+  body { font-family: var(--sans); background: var(--white); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 2rem; border-bottom: 1px solid var(--gray-200); }
+  .nav-logo { font-family: var(--mono); font-size: 0.85rem; font-weight: 500; color: var(--ink); text-decoration: none; letter-spacing: 0.05em; }
+  .nav-logo span { color: var(--teal); }
+  nav ul { display: flex; gap: 2rem; list-style: none; }
+  nav a { font-size: 0.85rem; color: var(--ink-muted); text-decoration: none; font-weight: 500; }
+  nav a:hover { color: var(--teal); }
+
+  /* HERO */
+  .hero { max-width: 760px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+  .hero-eyebrow { font-family: var(--mono); font-size: 0.75rem; font-weight: 500; color: var(--teal); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; color: var(--ink); margin-bottom: 1.5rem; }
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero-lead { font-size: 1.1rem; color: var(--ink-soft); max-width: 540px; line-height: 1.75; margin-bottom: 2.5rem; }
+  .cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .cta-primary { display: inline-block; font-family: var(--mono); font-size: 0.85rem; font-weight: 500; background: var(--teal); color: var(--white); padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none; transition: opacity 0.2s; }
+  .cta-primary:hover { opacity: 0.88; }
+  .cta-secondary { display: inline-block; font-family: var(--mono); font-size: 0.85rem; font-weight: 500; color: var(--teal); border: 1px solid var(--teal); padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none; transition: background 0.2s; }
+  .cta-secondary:hover { background: var(--teal-light); }
+
+  /* TRUST BAR */
+  .trust-bar { border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); padding: 1.25rem 2rem; }
+  .trust-inner { max-width: 760px; margin: 0 auto; display: flex; gap: 2.5rem; flex-wrap: wrap; }
+  .trust-item { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-muted); display: flex; align-items: center; gap: 0.4rem; }
+  .trust-item strong { color: var(--ink); }
+
+  /* SECTIONS */
+  .section { max-width: 760px; margin: 0 auto; padding: 4rem 2rem; }
+  .section + .section { border-top: 1px solid var(--gray-200); }
+  .section-eyebrow { font-family: var(--mono); font-size: 0.7rem; color: var(--teal); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1rem; }
+  .section h2 { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--ink); margin-bottom: 1rem; line-height: 1.2; }
+  .section p { color: var(--ink-soft); font-size: 0.95rem; line-height: 1.75; margin-bottom: 1rem; max-width: 580px; }
+
+  /* RANKING PREVIEW */
+  .rank-preview { display: flex; flex-direction: column; gap: 0.5rem; margin: 1.5rem 0; }
+  .rank-row { display: grid; grid-template-columns: 32px 1fr auto auto; gap: 0.75rem; align-items: center; padding: 0.875rem 1rem; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 5px; text-decoration: none; color: inherit; transition: border-color 0.2s; }
+  .rank-row:hover { border-color: var(--teal); }
+  .rank-n { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-muted); }
+  .rank-n.top { color: var(--teal); font-weight: 500; }
+  .rank-name { font-family: var(--sans); font-size: 0.95rem; font-weight: 500; color: var(--ink); }
+  .rank-grade { font-family: var(--mono); font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 3px; }
+  .grade-b { background: #DBEAFE; color: #1E40AF; }
+  .grade-c { background: #FEF9C3; color: #854D0E; }
+  .grade-d { background: #FEE2E2; color: #991B1B; }
+  .rank-score { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-muted); }
+  .see-all { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.8rem; color: var(--teal); text-decoration: none; border-bottom: 1px solid var(--teal-light); margin-top: 0.5rem; }
+
+  /* CITY GRID */
+  .city-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; margin: 1.5rem 0; }
+  .city-card { display: block; padding: 1rem 1.125rem; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 5px; text-decoration: none; transition: border-color 0.2s; }
+  .city-card:hover { border-color: var(--teal); }
+  .city-name { font-family: var(--serif); font-size: 1.05rem; color: var(--ink); margin-bottom: 0.25rem; }
+  .city-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-muted); }
+
+  /* DIMENSIONS */
+  .dim-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; margin: 1.5rem 0; }
+  .dim-card { padding: 1rem 1.125rem; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 5px; }
+  .dim-weight { font-family: var(--mono); font-size: 0.65rem; color: var(--teal); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.35rem; }
+  .dim-name { font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; }
+  .dim-desc { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-muted); line-height: 1.5; }
+
+  footer { border-top: 1px solid var(--gray-200); padding: 2.5rem 2rem; max-width: 760px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  .footer-left { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-muted); }
+  .footer-left strong { display: block; color: var(--ink); margin-bottom: 0.2rem; }
+  .footer-right { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-muted); text-align: right; }
+  @media (max-width: 640px) { nav ul { display: none; } .trust-inner { gap: 1.25rem; } footer { flex-direction: column; gap: 1rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">diet<span>meal</span>reviews</a>
+  <ul>
+    <li><a href="reviews.html">Reviews</a></li>
+    <li><a href="#cities">Cities</a></li>
+    <li><a href="scoring-methodology.html">Methodology</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Objective · Data-driven · No sponsored rankings</p>
+  <h1>Diet meal delivery,<br>ranked <em>objectively.</em></h1>
+  <p class="hero-lead">We score meal prep and meal delivery services on what actually matters — protein per dollar, delivery reliability, price transparency, and menu flexibility. Not taste. Not vibes.</p>
+  <div class="cta-row">
+    <a href="reviews.html" class="cta-primary">See national rankings →</a>
+    <a href="scoring-methodology.html" class="cta-secondary">How scoring works</a>
+  </div>
+</div>
+
+<div class="trust-bar">
+  <div class="trust-inner">
+    <span class="trust-item"><strong>7</strong> national services scored</span>
+    <span class="trust-item"><strong>357</strong> meals analyzed</span>
+    <span class="trust-item"><strong>5</strong> objective dimensions</span>
+    <span class="trust-item"><strong>7</strong> local markets covered</span>
+    <span class="trust-item"><strong>$0</strong> paid placements</span>
+  </div>
+</div>
+
+<!-- NATIONAL RANKINGS -->
+<div class="section">
+  <p class="section-eyebrow">National rankings · June 2026</p>
+  <h2>7 services. One composite score.</h2>
+  <p>Ranked across protein value, nutritional accuracy, delivery reliability, price transparency, and menu flexibility — applied equally to every service.</p>
+
+  <div class="rank-preview">
+    <a href="reviews.html" class="rank-row">
+      <span class="rank-n top">01</span>
+      <span class="rank-name">Trifecta</span>
+      <span class="rank-grade grade-b">B</span>
+      <span class="rank-score">7.68</span>
+    </a>
+    <a href="reviews.html" class="rank-row">
+      <span class="rank-n top">02</span>
+      <span class="rank-name">Snap Kitchen</span>
+      <span class="rank-grade grade-b">B</span>
+      <span class="rank-score">7.11</span>
+    </a>
+    <a href="reviews.html" class="rank-row">
+      <span class="rank-n top">03</span>
+      <span class="rank-name">Factor</span>
+      <span class="rank-grade grade-c">C</span>
+      <span class="rank-score">6.91</span>
+    </a>
+    <a href="reviews.html" class="rank-row">
+      <span class="rank-n">04</span>
+      <span class="rank-name">Sunbasket</span>
+      <span class="rank-grade grade-c">C</span>
+      <span class="rank-score">6.15</span>
+    </a>
+    <a href="reviews.html" class="rank-row">
+      <span class="rank-n">05</span>
+      <span class="rank-name">Green Chef</span>
+      <span class="rank-grade grade-d">D</span>
+      <span class="rank-score">5.90</span>
+    </a>
+  </div>
+  <a href="reviews.html" class="see-all">See all 7 services with full dimension breakdown →</a>
+</div>
+
+<!-- CITIES -->
+<div class="section" id="cities">
+  <p class="section-eyebrow">Local markets · 7 cities</p>
+  <h2>National chains aren't the only option.</h2>
+  <p>Every major metro has local meal prep operators — trainer-founded, dietitian-designed, pickup-available — that national review sites have never aggregated. We did.</p>
+
+  <div class="city-grid">
+    <a href="phoenix.html" class="city-card">
+      <div class="city-name">Phoenix</div>
+      <div class="city-meta">5 local services · AZ</div>
+    </a>
+    <a href="la.html" class="city-card">
+      <div class="city-name">Los Angeles</div>
+      <div class="city-meta">4 local services · CA</div>
+    </a>
+    <a href="sf.html" class="city-card">
+      <div class="city-name">San Francisco</div>
+      <div class="city-meta">4 local services · CA</div>
+    </a>
+    <a href="seattle.html" class="city-card">
+      <div class="city-name">Seattle</div>
+      <div class="city-meta">3 local services · WA</div>
+    </a>
+    <a href="portland.html" class="city-card">
+      <div class="city-name">Portland</div>
+      <div class="city-meta">3 local services · OR</div>
+    </a>
+    <a href="slc.html" class="city-card">
+      <div class="city-name">Salt Lake City</div>
+      <div class="city-meta">4 local services · UT</div>
+    </a>
+    <a href="spokane.html" class="city-card">
+      <div class="city-name">Spokane</div>
+      <div class="city-meta">3 local services · WA</div>
+    </a>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="section">
+  <p class="section-eyebrow">The scoring system</p>
+  <h2>Five dimensions. No taste scores.</h2>
+  <p>Most food media scores taste. We don't — taste is subjective and can't be standardized. These five dimensions can be.</p>
+
+  <div class="dim-grid">
+    <div class="dim-card">
+      <div class="dim-weight">25% weight</div>
+      <div class="dim-name">Protein Value</div>
+      <div class="dim-desc">Cost per gram of protein, benchmarked against the meal delivery market</div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-weight">20% weight</div>
+      <div class="dim-name">Nutritional Accuracy</div>
+      <div class="dim-desc">Proxy from review text analysis + USDA Organic certification bonus</div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-weight">20% weight</div>
+      <div class="dim-name">Delivery Reliability</div>
+      <div class="dim-desc">Trustpilot rating as a scaled proxy for sustained operational performance</div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-weight">20% weight</div>
+      <div class="dim-name">Price Transparency</div>
+      <div class="dim-desc">Gap between advertised per-meal price and true all-in cost with shipping</div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-weight">15% weight</div>
+      <div class="dim-name">Menu Flexibility</div>
+      <div class="dim-desc">Diet variety, skip/cancel policy, à la carte availability, and subscription terms</div>
+    </div>
+  </div>
+  <a href="scoring-methodology.html" class="see-all">Read the full methodology →</a>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <strong>dietmealreviews.com</strong>
+    Rankings v1.1 · Data collected June 2026
+  </div>
+  <div class="footer-right">
+    No service paid to influence its rating.<br>
+    Scores are calculated algorithmically.
+  </div>
+</footer>
+
+</body>
+</html>
